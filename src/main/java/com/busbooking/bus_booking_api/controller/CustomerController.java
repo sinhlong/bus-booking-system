@@ -20,8 +20,26 @@ public class CustomerController {
         return customerService.getAllCustomer();
     }
 
+    @GetMapping("/{id}")
+    public Customer getCustomerById(@PathVariable Integer id){
+        return customerService.getCustomerById(id);
+    }
+
     @PostMapping
     public Customer createCustomer(@RequestBody Customer customer){
         return customerService.createCustomer(customer);
     }
+
+    @PutMapping("/{id}")
+    public Customer updateCustomer(
+            @PathVariable Integer id,
+            @RequestBody Customer customer){
+        return customerService.updateCustomer(id,customer);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteCustomer(@PathVariable Integer id){
+        return customerService.deleteCustomer(id);
+    }
+
 }
