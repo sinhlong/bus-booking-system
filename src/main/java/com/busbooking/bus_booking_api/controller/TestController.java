@@ -9,4 +9,5 @@ public class TestController {
     public String test(){
         return "Bus Booking API is working";
     }
+
 }
