@@ -2,9 +2,7 @@ package com.busbooking.bus_booking_api.controller;
 
 import com.busbooking.bus_booking_api.entity.Customer;
 import com.busbooking.bus_booking_api.service.CustomerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,10 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getAllCustomer(){
         return customerService.getAllCustomer();
+    }
+
+    @PostMapping
+    public Customer createCustomer(@RequestBody Customer customer){
+        return customerService.createCustomer(customer);
     }
 }
