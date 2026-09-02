@@ -17,4 +17,37 @@ public class BusService {
     public List<Bus>getAllBus(){
         return busRepository.findAll();
     }
+
+    public Bus getBusById(Integer id){
+        return busRepository.findById(id).orElse(null);
+    }
+
+    public Bus createBus(Bus bus){
+        return busRepository.save(bus);
+    }
+
+    public Bus updateBus(Integer id,Bus bus){
+        Bus existingBus = busRepository.findById(id).orElse(null);
+
+        if(existingBus == null){
+            return null;
+        }
+
+        existingBus.setBusPlateNo(bus.getBusPlateNo());
+        existingBus.setBusType(bus.getBusType());
+        existingBus.setBusStatus(bus.getBusStatus());
+        existingBus.setBusTotalSeat(bus.getBusTotalSeat());
+
+        return busRepository.save(existingBus);
+    }
+
+    public boolean deleteBus(Integer id){
+
+        if(!busRepository.existsById(id)){
+            return false;
+        }
+
+        busRepository.deleteById(id);
+        return true;
+    }
 }
