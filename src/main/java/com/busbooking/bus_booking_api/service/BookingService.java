@@ -9,8 +9,6 @@ import com.busbooking.bus_booking_api.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
-
 @Service
 public class BookingService {
     private final BookingRepository bookingRepository;

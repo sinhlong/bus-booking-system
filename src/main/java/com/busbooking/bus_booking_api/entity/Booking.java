@@ -31,8 +31,8 @@ public class Booking {
         return bookingId;
     }
 
-    public void setBookingId(Integer bookingId) {
-        this.bookingId = bookingId;
+    public void setBookingId(Integer booking) {
+        this.bookingId = booking;
     }
 
     public Customer getCustomer() {
