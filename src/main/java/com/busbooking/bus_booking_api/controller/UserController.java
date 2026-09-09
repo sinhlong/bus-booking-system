@@ -2,7 +2,6 @@ package com.busbooking.bus_booking_api.controller;
 
 import com.busbooking.bus_booking_api.entity.User;
 import com.busbooking.bus_booking_api.service.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

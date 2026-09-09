@@ -1,6 +1,7 @@
 package com.busbooking.bus_booking_api.controller;
 
 import com.busbooking.bus_booking_api.dto.LoginRequest;
+import com.busbooking.bus_booking_api.dto.LoginResponse;
 import com.busbooking.bus_booking_api.service.AuthService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request){
+    public LoginResponse login(@RequestBody LoginRequest request){
         return authService.login(request);
     }
 }

@@ -2,8 +2,10 @@ package com.busbooking.bus_booking_api.service;
 
 import com.busbooking.bus_booking_api.entity.User;
 import com.busbooking.bus_booking_api.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,6 +29,12 @@ public class UserService {
 
     public User createUser(User user){
 
+        if(userRepository.findByUsername(user.getUsername()).isPresent()){
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,"Username already exist"
+            );
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
@@ -34,6 +42,14 @@ public class UserService {
 
     public User updateUser( Integer id,User user){
         User existingUser = userRepository.findById(id).orElse(null);
+
+        User usernameOwner = userRepository.findByUsername(user.getUsername()).orElse(null);
+
+        if(usernameOwner != null && !usernameOwner.getUserId().equals(id)){
+            throw  new ResponseStatusException(
+                    HttpStatus.CONFLICT,"Username already Exist"
+            );
+        }
 
         if(existingUser == null){
             return null;
