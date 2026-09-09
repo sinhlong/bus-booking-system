@@ -16,11 +16,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String username){
+    public String generateToken(String username,String role){
         long expiration = 1000 * 60 * 60; //1h
 
         return Jwts.builder()
                 .subject(username)
+                .claim("role",role)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getKey())
@@ -46,5 +47,14 @@ public class JwtService {
         } catch (Exception e){
             return false;
         }
+    }
+
+    public String extractRole(String token){
+        return Jwts.parser()
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("role",String.class);
     }
 }

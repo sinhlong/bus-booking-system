@@ -27,7 +27,7 @@ public class AuthService {
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword()))
             return "Wrong Password";
 
-        return jwtService.generateToken(user.getUsername());
+        return jwtService.generateToken(user.getUsername(),user.getRole());
     }
 
 
